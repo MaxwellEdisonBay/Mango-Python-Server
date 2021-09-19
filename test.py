@@ -1,6 +1,6 @@
 import requests
 
-BASE = "http://127.0.0.1:5000/"
+BASE = "https://test-ivanteslenko.herokuapp.com/"
 
 response = requests.get(BASE+"helloworld/tsds/19")
 print(response.json())
