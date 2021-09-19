@@ -16,4 +16,4 @@ api.add_resource(HelloWorld, "/helloworld/<string:name>/<int:test>")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
