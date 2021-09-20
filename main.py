@@ -21,4 +21,4 @@ class HelloWorld(Resource):
 api.add_resource(HelloWorld, "/helloworld/<string:name>/<int:test>")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
