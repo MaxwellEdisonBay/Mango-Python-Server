@@ -35,6 +35,10 @@ class Firebase:
     def removeDummyProfilesAll(self):
         self.db.child("test_users").remove()
 
+    # def createSearchDummyProfiles(self, number):
+    #     for
+
+
 if __name__ == "__main__":
     fireBase = Firebase()
     fireBase.initDB()
