@@ -27,6 +27,11 @@ Also, API processes smaller requests such as like someone, change user data etc.
   * Facebook/VK API
   * Local events parsing into JSON
   * Event recommendations
+* Message tips to start up a conversation
+* Gamification, more mechanics for comfortable UX _(experimental, A/B-tests)_
+* Guidelines violation filter
+  * image recognition
+  * Keras machine learning classification
 
 ## Search algorithm main goals
 * Provide the best match for a user according to given parameters
@@ -34,7 +39,10 @@ Also, API processes smaller requests such as like someone, change user data etc.
 * All the given profile bunches must be tracked to avoid unwanted card repetitions
 * *developing*
 
-## Methods
+## Packages
+
+### firebaseConnector.py  
+Handles all the database interaction, queries processing and data fetching.  
 
 | Method | Arguments | Description | Returns
 | --- | --- | --- | --- |
@@ -43,16 +51,29 @@ Also, API processes smaller requests such as like someone, change user data etc.
 | `fetchUsersWithParams` | _**search_params**: Params_ | Fetches user profiles JSONs from DB according to given params  | List of User
 | `evaluateUser` | _**users**: User, **search_params** : Params_ | Calculates how user profile fits required parameters  | Float _(User weight coefficient)_
 
+### app.py
+Main web application package handling incoming HTTP requests and sending prepared data
+
+### test.py
+Debug console app for testing HTTP requests on production
 
 ### Technologies
-* [Flask](https://flask.palletsprojects.com/en/2.0.x/)
-* [Firebase](https://firebase.google.com/)
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/) - main web framework
+* [Firebase](https://firebase.google.com/) - noSQL database by Google
+* [Heroku](https://devcenter.heroku.com/categories/reference) - web application deploy
 * [Pyrebase](https://github.com/thisbejim/Pyrebase) _- Firebase python API_
-* [Requests](https://docs.python-requests.org/en/latest/)
+* [Requests](https://docs.python-requests.org/en/latest/) - HTTP requests handling
+* [Scikit Learn _(future)_ ](https://scikit-learn.org/stable/) - ML library
+* [Keras _(future)_ ](https://keras.io/) - Python deep learning API
 
-### Inspirations
-* [Amazing profile bio ML AI model](https://towardsdatascience.com/dating-algorithms-using-machine-learning-and-ai-814b68ecd75e)
-
+### Inspiration
+* [Amazing Profile Bio ML AI Model](https://towardsdatascience.com/dating-algorithms-using-machine-learning-and-ai-814b68ecd75e)
+* [Distance Between Two Locations](https://towardsdatascience.com/driving-distance-between-two-or-more-places-in-python-89779d691def)
+* [Deep Learning Web App Using Keras](https://towardsdatascience.com/a-complete-deep-learning-portfolio-project-9c5dc7f3f2ef)
+* [Scikit Learn Classifier Calibration](https://towardsdatascience.com/introduction-to-reliability-diagrams-for-probability-calibration-ed785b3f5d44)
+* [Amazing Morphological Analysis Library for NLP](https://github.com/petrpulc/python-majka)
+* [Scikit Learn Support Vector Machine in Details](https://towardsdatascience.com/svm-with-scikit-learn-what-you-should-know-780f1bc99e4a)
+* [Multiclass ML Classification](https://towardsdatascience.com/machine-learning-multiclass-classification-with-imbalanced-data-set-29f6a177c1a)
 ## API requests supported
 
 | Request | Arguments | Description | Returns
@@ -73,4 +94,10 @@ Chats and chat messages nodes
 
 ![image](https://i.ibb.co/jrxJQVN/chats-messages-db.png)
 
-
+## Heroku deploy  
+**Actual production URL:** `https://mango-friends.herokuapp.com/`  
+Web application is easy to be deployed in Heroku by using following commands:  
+`$ heroku login`  
+`$ git add .`  
+`$ git commit -am "Heroku deploy"`  
+`$ git push heroku HEAD:master`
