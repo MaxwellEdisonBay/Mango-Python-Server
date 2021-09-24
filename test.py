@@ -1,7 +1,7 @@
 import requests
 import sys
 
-std_base = "https://mango-friends.herokuapp.com/"
+std_base = "http://mango-friends.com//"
 std_req = "testapi/ivan/20"
 
 

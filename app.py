@@ -11,6 +11,41 @@ def main():
     return flask.render_template("index.html")
 
 
+@app.route("/feature")
+def features():
+    return flask.render_template("feature.html")
+
+
+@app.route("/services")
+def services():
+    return flask.render_template("services.html")
+
+
+@app.route("/pricing")
+def pricing():
+    return flask.render_template("pricing.html")
+
+
+@app.route("/blog")
+def blog():
+    return flask.render_template("blog.html")
+
+
+@app.route("/single-blog")
+def single_blog():
+    return flask.render_template("single-blog.html")
+
+
+@app.route("/elements")
+def elements():
+    return flask.render_template("elements.html")
+
+
+@app.route("/contact")
+def contact():
+    return flask.render_template("contact.html")
+
+
 class TestAPI(Resource):
     def get(self, name, age):
         return {"data": f"Hi, your name is {name} and age is {age}"}
