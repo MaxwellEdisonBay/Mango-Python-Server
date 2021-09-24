@@ -95,7 +95,9 @@ Chats and chat messages nodes
 ![image](https://i.ibb.co/jrxJQVN/chats-messages-db.png)
 
 ## Heroku deploy  
-**Actual production URL:** `https://mango-friends.herokuapp.com/`  
+**Actual production URL:** 
+`https://mango-friends.com/`  
+  
 Web application is easy to be deployed in Heroku by using following commands:  
 `$ heroku login`  
 `$ git add .`  
