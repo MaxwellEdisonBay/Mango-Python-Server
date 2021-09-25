@@ -1,11 +1,13 @@
 import flask
 from flask import Flask
-from flask_restful import Api, Resource, reqparse
+from flask import request
+from flask_restful import Api, Resource
+
 
 app = Flask(__name__)
 api = Api(app)
 
-
+# app.config["SERVER_NAME"] = "mango.test:5000"
 @app.route("/")
 def main():
     return flask.render_template("index.html")
@@ -54,7 +56,21 @@ class TestAPI(Resource):
         return {"data": "Posted"}
 
 
+@app.route("/contact_process.php", methods=['POST'])
+def contact_process():
+    if request.method=='POST':
+        return
+
+
+@app.route("/", subdomain="api", methods=['POST', 'GET'])
+def api_process():
+    if request.method=='POST':
+        return {'success-code':'200'}
+    elif request.method == 'GET':
+        print("SDSDSD")
+        return flask.render_template("api.html")
+
 api.add_resource(TestAPI, "/testapi/<string:name>/<int:age>")
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run()
