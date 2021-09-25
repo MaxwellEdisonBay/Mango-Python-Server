@@ -14,7 +14,9 @@ def test_api(subdomain, url):
     print(response.json())
 
 if __name__ == "__main__":
-    test_api("api","mango.test:5000")
+    # test_api("api","mango.test:5000")
+    # test_api("api","mango-friends.com")
+    send_request()
     # args = sys.argv
     # argn = len(args)
     # if argn == 3:

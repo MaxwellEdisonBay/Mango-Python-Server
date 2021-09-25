@@ -8,7 +8,9 @@ app = Flask(__name__)
 api = Api(app)
 
 # app.config["SERVER_NAME"] = "mango.test:5000"
-@app.route("/")
+
+
+@app.route("/", subdomain="www")
 def main():
     return flask.render_template("index.html")
 
@@ -69,6 +71,7 @@ def api_process():
     elif request.method == 'GET':
         print("SDSDSD")
         return flask.render_template("api.html")
+
 
 api.add_resource(TestAPI, "/testapi/<string:name>/<int:age>")
 
