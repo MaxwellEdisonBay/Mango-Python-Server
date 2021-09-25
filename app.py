@@ -7,10 +7,10 @@ from flask_restful import Api, Resource
 app = Flask(__name__)
 api = Api(app)
 
-# app.config["SERVER_NAME"] = "mango.test:5000"
+app.config["SERVER_NAME"] = "mango.test:5000"
 
 
-@app.route("/", subdomain="www")
+@app.route("/")
 def main():
     return flask.render_template("index.html")
 
