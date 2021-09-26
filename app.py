@@ -3,14 +3,14 @@ from flask import render_template
 from flask import Flask
 from flask import request
 from flask_restful import Api, Resource
-
 from blueprints.index_bp import index_bp
+from consts import ErrorCode
 
 app = Flask(__name__)
 api = Api(app)
 
-# app.config["SERVER_NAME"] = "mango.test:5000"
-app.config['SERVER_NAME'] = 'mango-friends.com'
+app.config["SERVER_NAME"] = "mango.test:5000"
+# app.config['SERVER_NAME'] = 'mango-friends.com'
 
 
 @app.route("/static/<path:path>", subdomain="www")
@@ -75,7 +75,13 @@ def contact_process():
 @app.route("/", subdomain="api", methods=['POST', 'GET'])
 def api_process():
     if request.method == 'POST':
-        return {'success-code': '200'}
+        res = {'data':'test'}
+        print(request.headers)
+        headers = request.headers
+        if headers['Request-Type']=="test":
+            return res, ErrorCode.OK
+        else:
+            return res, ErrorCode.FORBIDDEN
     elif request.method == 'GET':
         print("SDSDSD")
         return render_template("api.html")
