@@ -1,53 +1,61 @@
-import flask
+from flask import send_file
+from flask import render_template
 from flask import Flask
 from flask import request
 from flask_restful import Api, Resource
 
+from blueprints.index_bp import index_bp
 
 app = Flask(__name__)
 api = Api(app)
 
-app.config["SERVER_NAME"] = "mango.test:5000"
+# app.config["SERVER_NAME"] = "mango.test:5000"
+app.config['SERVER_NAME'] = 'mango-friends.com'
 
 
-@app.route("/")
+@app.route("/static/<path:path>", subdomain="www")
+def static_dir(path):
+    return send_file("static/"+path)
+
+
+@app.route("/", methods=['POST', 'GET'], subdomain='www')
 def main():
-    return flask.render_template("index.html")
+    return render_template("index.html")
 
 
-@app.route("/feature")
+@app.route("/feature", subdomain="www")
 def features():
-    return flask.render_template("feature.html")
+    return render_template("feature.html")
 
 
-@app.route("/services")
+@app.route("/services", subdomain="www")
 def services():
-    return flask.render_template("services.html")
+    return render_template("services.html")
 
 
-@app.route("/pricing")
+@app.route("/pricing", subdomain="www")
 def pricing():
-    return flask.render_template("pricing.html")
+    return render_template("pricing.html")
 
 
-@app.route("/blog")
+@app.route("/blog", subdomain="www")
 def blog():
-    return flask.render_template("blog.html")
+    return render_template("blog.html")
 
 
-@app.route("/single-blog")
+@app.route("/single-blog", subdomain="www")
 def single_blog():
-    return flask.render_template("single-blog.html")
+    return render_template("single-blog.html")
 
 
-@app.route("/elements")
+@app.route("/elements", subdomain="www")
 def elements():
-    return flask.render_template("elements.html")
+    return render_template("elements.html")
 
 
-@app.route("/contact")
+@app.route("/contact", subdomain="www")
 def contact():
-    return flask.render_template("contact.html")
+    return render_template("contact.html")
 
 
 class TestAPI(Resource):
@@ -60,17 +68,17 @@ class TestAPI(Resource):
 
 @app.route("/contact_process.php", methods=['POST'])
 def contact_process():
-    if request.method=='POST':
+    if request.method == 'POST':
         return
 
 
 @app.route("/", subdomain="api", methods=['POST', 'GET'])
 def api_process():
-    if request.method=='POST':
-        return {'success-code':'200'}
+    if request.method == 'POST':
+        return {'success-code': '200'}
     elif request.method == 'GET':
         print("SDSDSD")
-        return flask.render_template("api.html")
+        return render_template("api.html")
 
 
 api.add_resource(TestAPI, "/testapi/<string:name>/<int:age>")
