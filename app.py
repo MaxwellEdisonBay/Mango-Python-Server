@@ -2,15 +2,16 @@ from flask import send_file
 from flask import render_template
 from flask import Flask
 from flask import request
-from flask_restful import Api, Resource
+
+from api_requests import respond
 from blueprints.index_bp import index_bp
-from consts import ErrorCode
+from firebaseConnector import Firebase
 
 app = Flask(__name__)
-api = Api(app)
 
-app.config["SERVER_NAME"] = "mango.test:5000"
-# app.config['SERVER_NAME'] = 'mango-friends.com'
+# app.config["SERVER_NAME"] = "mango.test:5000"
+app.config['SERVER_NAME'] = 'mango-friends.com'
+fireBase = Firebase(user_create_mode='users-test')
 
 
 @app.route("/static/<path:path>", subdomain="www")
@@ -58,14 +59,6 @@ def contact():
     return render_template("contact.html")
 
 
-class TestAPI(Resource):
-    def get(self, name, age):
-        return {"data": f"Hi, your name is {name} and age is {age}"}
-
-    def post(self):
-        return {"data": "Posted"}
-
-
 @app.route("/contact_process.php", methods=['POST'])
 def contact_process():
     if request.method == 'POST':
@@ -75,19 +68,12 @@ def contact_process():
 @app.route("/", subdomain="api", methods=['POST', 'GET'])
 def api_process():
     if request.method == 'POST':
-        res = {'data':'test'}
-        print(request.headers)
-        headers = request.headers
-        if headers['Request-Type']=="test":
-            return res, ErrorCode.OK
-        else:
-            return res, ErrorCode.FORBIDDEN
+        return respond(request, fireBase)
+
     elif request.method == 'GET':
         print("SDSDSD")
         return render_template("api.html")
 
-
-api.add_resource(TestAPI, "/testapi/<string:name>/<int:age>")
 
 if __name__ == "__main__":
     app.run()
