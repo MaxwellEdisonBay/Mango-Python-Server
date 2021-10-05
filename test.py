@@ -13,16 +13,14 @@ def send_request(req=std_req, base=std_base):
 
 def test_api(subdomain, url, req_type):
     request_type = {"Request-Type": req_type}
-    request_data = {"uid":str(uuid.uuid4()), "name":"test", "sirname":"test_sirname"}
+    request_data = {"user-id":str(uuid.uuid4()), "user-data":{"name":"ivan", "sirname":"chmo"}}
     response = requests.post("http://" + subdomain + '.' + url, json=request_data, headers=request_type)
     print(response.status_code)
-    # print(response.json())
+    print(response.json())
 
 
 if __name__ == "__main__":
-    # test_api("api", "mango.test:5000", "create-user")
-    test_api("api", "mango-friends.com", "create-user")
-
+    test_api("api", "mango.test:5000", "create-user")
     # test_api("api", "mango.test:5000", "bad-request")
     # test_api("api","mango-friends.com")
     # send_request()
