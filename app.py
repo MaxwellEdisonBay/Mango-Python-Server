@@ -11,7 +11,8 @@ app = Flask(__name__)
 
 # app.config["SERVER_NAME"] = "mango.test"
 app.config['SERVER_NAME'] = 'mango-friends.com'
-fireBase = Firebase(user_create_mode='users-test')
+# fireBase = Firebase(user_create_mode='users-test')
+fireBase = Firebase()
 
 
 @app.route("/static/<path:path>", subdomain="www")

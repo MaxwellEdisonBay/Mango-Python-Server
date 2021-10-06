@@ -11,7 +11,7 @@ def respond (request, db):
         respond_json['test'] = 'ok'
         return respond_json, ErrorCode.OK
     elif method == 'create-user':
-        db.createUser(data["uid"], data)
         print(data)
+        db.createUser(data["uid"], data)
         return respond_json, ErrorCode.OK
 

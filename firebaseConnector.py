@@ -39,8 +39,8 @@ class Firebase:
 
 
 if __name__ == "__main__":
-    fireBase = Firebase()
-
+    fireBase = Firebase(user_create_mode='users-test')
+    fireBase.createUser("data", {"data":"sdsd", "blab":'sdsd'})
     # fireBase.removeDummyProfilesAll()
     # fireBase.createDummyProfiles(10)
     # print(fireBase.fetchUserData("7NhwiPqbkrY3cWingePesqFdfBn1"))
