@@ -3,21 +3,22 @@ from flask import render_template
 from flask import Flask
 from flask import request
 
-from api_requests import respond
+from api_requests import respond, get_users
 from blueprints.index_bp import index_bp
+from consts import ErrorCode
 from firebaseConnector import Firebase
 
 app = Flask(__name__)
 
-# app.config["SERVER_NAME"] = "mango.test"
-app.config['SERVER_NAME'] = 'mango-friends.com'
+app.config["SERVER_NAME"] = "mango-friends.test:5000"
+# app.config['SERVER_NAME'] = 'mango-friends.com'
 # fireBase = Firebase(user_create_mode='users-test')
 fireBase = Firebase()
 
 
 @app.route("/static/<path:path>", subdomain="www")
 def static_dir(path):
-    return send_file("static/"+path)
+    return send_file("static/" + path)
 
 
 @app.route("/", methods=['POST', 'GET'], subdomain='www')
@@ -67,13 +68,18 @@ def contact_process():
 
 
 @app.route("/", subdomain="api", methods=['POST', 'GET'])
-def api_process():
+def apiProcessCalls():
     if request.method == 'POST':
         return respond(request, fireBase)
 
     elif request.method == 'GET':
         print("SDSDSD")
         return render_template("api.html")
+
+
+@app.route("/get-users/<uid>", subdomain="api", methods=['GET'])
+def apiGetUsers(uid):
+    return get_users(uid, fireBase)
 
 
 if __name__ == "__main__":

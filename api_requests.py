@@ -1,7 +1,7 @@
 from consts import ErrorCode
 
 
-def respond (request, db):
+def respond(request, db):
     respond_json = {}
 
     method = request.headers['Request-Type']
@@ -15,3 +15,7 @@ def respond (request, db):
         db.createUser(data["uid"], data)
         return respond_json, ErrorCode.OK
 
+
+def get_users(uid, db):
+    response = db.getUsers()
+    return response, ErrorCode.OK
