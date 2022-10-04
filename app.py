@@ -67,7 +67,7 @@ def contact_process():
         return
 
 
-@app.route("/api", methods=['POST', 'GET'])
+@app.route("/gitwiApi", methods=['POST', 'GET'])
 def apiProcessCalls():
     if request.method == 'POST':
         return respond(request, fireBase)
@@ -77,7 +77,7 @@ def apiProcessCalls():
         return render_template("api.html")
 
 
-@app.route("/api/get-users/<uid>", methods=['GET'])
+@app.route("/gitwiApi/get-users/<uid>", methods=['GET'])
 def apiGetUsers(uid):
     return get_users(uid, fireBase)
 
