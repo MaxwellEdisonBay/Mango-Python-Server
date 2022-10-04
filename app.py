@@ -10,7 +10,7 @@ from firebaseConnector import Firebase
 
 app = Flask(__name__)
 
-app.config["SERVER_NAME"] = "mango-friends.test:5000"
+# app.config["SERVER_NAME"] = "127.0.0.1:5001"
 # app.config['SERVER_NAME'] = 'mango-friends.com'
 # fireBase = Firebase(user_create_mode='users-test')
 fireBase = Firebase()
@@ -67,7 +67,7 @@ def contact_process():
         return
 
 
-@app.route("/", subdomain="api", methods=['POST', 'GET'])
+@app.route("/api", methods=['POST', 'GET'])
 def apiProcessCalls():
     if request.method == 'POST':
         return respond(request, fireBase)
@@ -77,10 +77,10 @@ def apiProcessCalls():
         return render_template("api.html")
 
 
-@app.route("/get-users/<uid>", subdomain="api", methods=['GET'])
+@app.route("/api/get-users/<uid>", methods=['GET'])
 def apiGetUsers(uid):
     return get_users(uid, fireBase)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=False, port=5001, host="127.0.0.1")
